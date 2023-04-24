@@ -26,39 +26,47 @@ function CartContainer() {
 
   return (
     <>
-      <h1>Tu Carrito</h1>
+      <h1 style={{ fontSize: "3rem", color: "darkred" }}>Tu Carrito</h1>
       <table className="cartList">
         <thead className="cartList_head">
           <tr className="cartList_row">
-            <th>Snap</th>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Quitar</th>
-            <th>Total</th>
+            <th style={{ fontSize: "2rem", color: "white" }}>Snap</th>
+            <th style={{ fontSize: "2rem", color: "white" }}>Producto</th>
+            <th style={{ fontSize: "2rem", color: "white" }}>Precio</th>
+            <th style={{ fontSize: "2rem", color: "white" }}>Cantidad</th>
+            <th style={{ fontSize: "2rem", color: "white" }}>Quitar</th>
+            <th style={{ fontSize: "2rem", color: "white" }}>Total</th>
           </tr>
         </thead>
         <tbody>
           {cart.map((item) => (
             <tr key={item.id} className="cartList_row">
               <td>
-                <img height={50} src={item.img} alt={item.marca} />
+                <img height={50} src={item.img} alt={item.title} />
               </td>
-              <td>{item.marca}</td>
-              <td>$ {item.precio}</td>
-              <td>{item.count}</td>
+              <td style={{ fontSize: "1.5rem", color: "black" }}>
+                {item.title.toUpperCase()}
+              </td>
+              <td style={{ fontSize: "1.5rem", color: "black" }}>
+                $ {item.precio}
+              </td>
+              <td style={{ fontSize: "1.5rem", color: "black" }}>
+                {item.count}
+              </td>
               <td>
-                <Button color="#c63224" onClick={item.removeItem}>
-                  X
-                </Button>
+                <Button color="#c63224" onClick={item.removeItem}>Eliminar Item</Button>
               </td>
-              <th>$ --,--</th>
+              <th style={{ fontSize: "1.5rem", color: "black" }}>
+                $ {item.count * item.precio}
+              </th>
             </tr>
           ))}
         </tbody>
       </table>
       <div className="cartList_detail">
-        <h4>El total de tu compra es de $ --,--</h4>
+        <h4 style={{ fontSize: "2rem", color: "black" }}>
+          El total de tu compra es de $ {getTotalPrice()}
+        </h4>
       </div>
       <FormCheckout onCheckout={handleCheckout} />
     </>

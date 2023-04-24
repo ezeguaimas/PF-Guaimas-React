@@ -1,4 +1,4 @@
-import styles from "./button.css";
+import "./button.css";
 
 const Button = (props) => {
   const styleButton = {
@@ -9,8 +9,9 @@ const Button = (props) => {
     <button
       onClick={props.onClick}
       disabled={props.disabled}
-      className={styles.btn}
+      className="btn"
       style={styleButton}
+      
     >
       {props.text}
       {props.children}

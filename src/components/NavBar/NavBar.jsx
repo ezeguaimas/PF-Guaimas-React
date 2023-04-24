@@ -3,9 +3,6 @@ import mandingaLogo from "../Img/mandingaLogo.png";
 import { Link } from "react-router-dom";
 // import { exportDataWithBatch } from "../../services/firestore";
 
-import { useContext } from "react";
-import { cartContext } from "../../context/cartContext";
-
 const styleNavList = {
   textDecoration: "none",
   fontSize: "2.8vmin",
@@ -16,8 +13,6 @@ const styleNavList = {
 };
 
 function NavBar() {
-  const { cart } = useContext(cartContext);
-
   return (
     <nav
       style={{
@@ -83,22 +78,20 @@ function NavBar() {
           </li>
 
           <li style={{ margin: "2vh" }}>
-            <Link style={styleNavList} to="/cart">Cart</Link>
+            <Link style={styleNavList} to="/cart">
+              Cart
+            </Link>
           </li>
+
+          {/* <li style={{ margin: "2vh" }}>
+            <Link><button onClick={exportDataWithBatch}>EXPORT DATA</button></Link>
+          </li> */}
         </ul>
       </div>
 
-      {/* <button onClick={exportDataWithBatch}>EXPORT DATA</button> */}
-
-      {/* CartWidget*/}
-      <div>
-        🛒
-        <span className="cartWidget_count">{cart.length}</span>
-      </div>
-
-      <div style={{ marginRight: "3vh" }}>
+      <Link style={{ marginRight: "3vh" }} to="/cart">
         <CartWidget />
-      </div>
+      </Link>
     </nav>
   );
 }

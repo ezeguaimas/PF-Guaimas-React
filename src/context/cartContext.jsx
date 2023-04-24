@@ -1,10 +1,8 @@
 import { createContext, useState } from "react";
 import useDeepCopy from "../hooks/useDeepCopy";
 
-// 1 CREARLO con createContext
 const cartContext = createContext({ cart: [] });
 
-// 2 crear el PROVIDER
 function CartProvider(props) {
   const [cart, setCart] = useState([]);
   const newCart = useDeepCopy(cart);
@@ -17,13 +15,33 @@ function CartProvider(props) {
       newCart[itemIndex].count += countFromCounter;
     } else {
       newCart.push({ ...product, count: countFromCounter });
+      newCart[newCart.length - 1].removeItem = () => removeItem(product.id);
     }
     setCart(newCart);
   }
+  
+
+  //function addItem(product, countFromCounter) {
+  //  if (isItemInCart(product.id)) {
+  //    const itemIndex = cart.findIndex(
+  //      (itemInCart) => itemInCart.id === product.id
+  //    );
+  //    newCart[itemIndex].count += countFromCounter;
+  //  } else {
+  //    newCart.push({ ...product, count: countFromCounter });
+  //  }
+  //  setCart(newCart);
+  //}
 
   function removeItem(idToDelete) {
-    /*  */
+    const updatedCart = newCart.filter((itemInCart) => itemInCart.id !== idToDelete);
+    setCart(updatedCart);
   }
+  
+  
+  //function removeItem(idToDelete) {
+  //  /*  */
+  //}
 
   function isItemInCart(id) {
     return cart.some((itemInCart) => itemInCart.id === id);
@@ -35,9 +53,13 @@ function CartProvider(props) {
     return item !== undefined ? item.count : 0;
   }
 
-  function getTotalPrice(){
-    let total = 0;
-    return 1900;
+
+  function getTotalPrice() {
+    let totalPrice = 0;
+    cart.forEach((item) => {
+      totalPrice += item.count * item.precio;
+    });
+    return totalPrice;
   }
 
   return (

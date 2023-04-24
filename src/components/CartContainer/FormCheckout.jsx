@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./FormCheckout.css";
 
 export default function FormCheckout({ onCheckout }) {
   const [userData, setUserData] = useState({
@@ -10,7 +11,6 @@ export default function FormCheckout({ onCheckout }) {
   function handleInputChange(evt) {
     const inputText = evt.target.value;
     const inputName = evt.target.name;
-    //userData["phone"] -> userData.phone
     const newUserData = { ...userData };
     newUserData[inputName] = inputText;
     setUserData(newUserData);
@@ -31,8 +31,8 @@ export default function FormCheckout({ onCheckout }) {
   }
 
   return (
-    <>
-      <h1>Ingresa tus datos para completar la compra 🛍</h1>
+    <div id="checkout-form">
+      <h1>Ingresa tus datos para completar la compra</h1>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label className="label-input">Nombre</label>
@@ -49,8 +49,10 @@ export default function FormCheckout({ onCheckout }) {
         <button onClick={onSubmit} type="submit">
           Crear orden
         </button>
-        <button onClick={clearFormData}>Cancelar</button>
+        <button onClick={clearFormData} type="button">
+          Cancelar
+        </button>
       </form>
-    </>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 .cartList{
   border-spacing: 0;
   border-radius: 5px;
-  border: solid 1px rgb(233, 244, 75);  
+  border: solid 1px #141414;  
   width: 95%;
   margin: 15px auto;
   text-align: center;
@@ -9,7 +9,7 @@
 }
 
 .cartList_head{
-  background-color: rgb(233, 244, 75);;
+  background-color: #141414;
   margin: 8px auto;
 }
 
