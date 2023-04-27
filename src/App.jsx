@@ -16,10 +16,20 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<ItemListContainer />} />
-            <Route path="/category/:categoryid" element={<ItemListContainer />} />
-            <Route path="/product/:productid" element={<ItemDetailContainer />} />
+            <Route
+              path="/category/:categoryid"
+              element={<ItemListContainer />}
+            />
+            <Route
+              path="/product/:productid"
+              element={<ItemDetailContainer />}
+            />
             <Route path="/cart" element={<CartContainer />} />
-            <Route path="/checkout/:orderid" element={<Checkout />} />
+            <Route
+              path="/checkout/:orderid"
+              element={<Checkout />}
+              component={Checkout}
+            />
             <Route path="*" element={<ErrorPNF />} />
           </Routes>
         </BrowserRouter>

@@ -74,17 +74,11 @@ function ItemDetailContainer() {
         </Typography>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Link to={`/product/${product.id - 1}`}>
-            <Button
-            >
-              Anterior
-            </Button>
+            <Button>Anterior</Button>
           </Link>
 
           <Link to={`/product/${product.id + 1}`}>
-            <Button
-            >
-              Siguiente
-            </Button>
+            <Button>Siguiente</Button>
           </Link>
         </div>
         <ItemCount
@@ -93,34 +87,6 @@ function ItemDetailContainer() {
         />
       </Card>
     </Flex>
-
-    // //--------------------------------------------------------------------------------------
-    // /* <ItemDetail> */
-    // <div className="card-detail_main">
-    //   <div className="card-detail_img">
-    //     <img src={product.img} alt={product.marca} />
-    //   </div>
-    //   <div className="card-detail_detail">
-    //     <h1>{product.marca}</h1>
-    //     <h2 className="priceTag">$ {product.precio}</h2>
-    //     <small>{product.tipo}</small>
-    //   </div>
-
-    //   {/* Rendering condicional */}
-    //   {/* si addedToCart === true? <ItemCount> : <>ir al carrito<> */}
-    //   <ItemCount
-    //     stock={product.stock - countInCart}
-    //     onAddToCart={onAddToCart}
-    //   />
-
-    //   <Link to={`/detalle/${product.id - 1}`}>
-    //     <Button>Anterior</Button>
-    //   </Link>
-    //   <Link to={`/detalle/${product.id + 1}`}>
-    //     <Button>Siguiente</Button>
-    //   </Link>
-    // </div>
-    // //--------------------------------------------------------------------------------------
   );
 }
 

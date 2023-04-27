@@ -8,13 +8,15 @@ import { cartContext } from "../context/cartContext";
 function CartWidget() {
   const { cart } = useContext(cartContext);
 
+  const totalCount = cart.reduce((total, item) => total + item.count, 0);
+
   return (
     <IconButton aria-label="cart">
       <StyledBadge
-        badgeContent={cart.length}
+        badgeContent={totalCount}
         color="primary"
         fontSize="2rem"
-        minWidth="40px"
+        width="40px"
         height="40px"
       >
         <ShoppingCartIcon style={{ fontSize: "8vh", color: "darkred" }} />

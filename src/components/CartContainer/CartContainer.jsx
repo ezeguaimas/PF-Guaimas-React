@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
 import { cartContext } from "../../context/cartContext";
 import Button from "../Button/Button";
-import "./cart.css";
 import { createOrder } from "../../services/firestore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import "./CartContainer.css";
+import emptyCartImage from "../Img/empty-cart.png";
+import Checkout from "../Checkout/Checkout";
 import FormCheckout from "./FormCheckout";
 
 function CartContainer() {
   const context = useContext(cartContext);
   const { cart, getTotalPrice } = context;
-
   const navigateTo = useNavigate();
-
+  const { orderId } = useParams();
   async function handleCheckout(userData) {
     const order = {
       items: cart,
@@ -19,23 +20,30 @@ function CartContainer() {
       total: getTotalPrice(),
       date: new Date(),
     };
-
-    const orderId = await createOrder(order);
-    navigateTo(`/checkout/${orderId}`);
+    const newOrderId = await createOrder(order);
+    navigateTo(`/checkout/${newOrderId}`);
   }
-
+  if (cart.length === 0) {
+    return (
+      <div>
+        <h1>Tu Carrito</h1>
+        <p>Tu carrito está vacío</p>
+        <img src={emptyCartImage} alt="Carrito vacío" />
+      </div>
+    );
+  }
   return (
     <>
-      <h1 style={{ fontSize: "3rem", color: "darkred" }}>Tu Carrito</h1>
+      <h1>Tu Carrito</h1>
       <table className="cartList">
         <thead className="cartList_head">
           <tr className="cartList_row">
-            <th style={{ fontSize: "2rem", color: "white" }}>Snap</th>
-            <th style={{ fontSize: "2rem", color: "white" }}>Producto</th>
-            <th style={{ fontSize: "2rem", color: "white" }}>Precio</th>
-            <th style={{ fontSize: "2rem", color: "white" }}>Cantidad</th>
-            <th style={{ fontSize: "2rem", color: "white" }}>Quitar</th>
-            <th style={{ fontSize: "2rem", color: "white" }}>Total</th>
+            <th>Snap</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Quitar</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
@@ -44,33 +52,28 @@ function CartContainer() {
               <td>
                 <img height={50} src={item.img} alt={item.title} />
               </td>
-              <td style={{ fontSize: "1.5rem", color: "black" }}>
-                {item.title.toUpperCase()}
-              </td>
-              <td style={{ fontSize: "1.5rem", color: "black" }}>
-                $ {item.precio}
-              </td>
-              <td style={{ fontSize: "1.5rem", color: "black" }}>
-                {item.count}
-              </td>
+              <td>{item.title.toUpperCase()}</td>
+              <td>$ {item.precio}</td>
+              <td>{item.count}</td>
               <td>
-                <Button color="#c63224" onClick={item.removeItem}>Eliminar Item</Button>
+                <Button
+                  color="#c63224"
+                  onClick={() => context.removeItem(item.id)}
+                >
+                  Eliminar Item
+                </Button>
               </td>
-              <th style={{ fontSize: "1.5rem", color: "black" }}>
-                $ {item.count * item.precio}
-              </th>
+              <th>$ {item.count * item.precio}</th>
             </tr>
           ))}
         </tbody>
       </table>
       <div className="cartList_detail">
-        <h4 style={{ fontSize: "2rem", color: "black" }}>
-          El total de tu compra es de $ {getTotalPrice()}
-        </h4>
+        <h4>El total de tu compra es de $ {getTotalPrice()}</h4>
       </div>
       <FormCheckout onCheckout={handleCheckout} />
+      {orderId && <Checkout orderId={orderId} />}
     </>
   );
 }
-
 export default CartContainer;

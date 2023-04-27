@@ -1,0 +1,52 @@
+h1 {
+  font-size: 3rem;
+  color: darkred;
+}
+
+table.cartList {
+  border-collapse: collapse;
+  margin: 2rem auto;
+  width: 90%;
+}
+
+thead.cartList_head {
+  background-color: lightgray;
+}
+
+.cartList_row {
+  border: 1px solid black;
+}
+
+th,
+td {
+  font-size: 2rem;
+  color: black;
+  text-align: center;
+  padding: 1rem;
+}
+
+td {
+  font-size: 1.5rem;
+  color: black;
+}
+
+.cartList_detail {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.cartList_detail h4 {
+  font-size: 2rem;
+  color: black;
+}
+
+.emptyCart img {
+  width: "20%";
+  height: "20%";
+}
+
+.emptyCart p {
+  font-size: 4rem;
+  color: orangered;
+}

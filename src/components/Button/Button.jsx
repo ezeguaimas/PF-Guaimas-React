@@ -11,7 +11,6 @@ const Button = (props) => {
       disabled={props.disabled}
       className="btn"
       style={styleButton}
-      
     >
       {props.text}
       {props.children}

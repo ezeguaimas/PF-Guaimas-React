@@ -15,33 +15,16 @@ function CartProvider(props) {
       newCart[itemIndex].count += countFromCounter;
     } else {
       newCart.push({ ...product, count: countFromCounter });
-      newCart[newCart.length - 1].removeItem = () => removeItem(product.id);
     }
     setCart(newCart);
   }
-  
-
-  //function addItem(product, countFromCounter) {
-  //  if (isItemInCart(product.id)) {
-  //    const itemIndex = cart.findIndex(
-  //      (itemInCart) => itemInCart.id === product.id
-  //    );
-  //    newCart[itemIndex].count += countFromCounter;
-  //  } else {
-  //    newCart.push({ ...product, count: countFromCounter });
-  //  }
-  //  setCart(newCart);
-  //}
 
   function removeItem(idToDelete) {
-    const updatedCart = newCart.filter((itemInCart) => itemInCart.id !== idToDelete);
+    const updatedCart = cart.filter(
+      (itemInCart) => itemInCart.id !== idToDelete
+    );
     setCart(updatedCart);
   }
-  
-  
-  //function removeItem(idToDelete) {
-  //  /*  */
-  //}
 
   function isItemInCart(id) {
     return cart.some((itemInCart) => itemInCart.id === id);
@@ -53,7 +36,6 @@ function CartProvider(props) {
     return item !== undefined ? item.count : 0;
   }
 
-
   function getTotalPrice() {
     let totalPrice = 0;
     cart.forEach((item) => {
@@ -62,9 +44,23 @@ function CartProvider(props) {
     return totalPrice;
   }
 
+  function removeAllItems() {
+    cart.forEach((item) => {
+      removeItem(item.id);
+    });
+  }
+
   return (
     <cartContext.Provider
-      value={{ cart: cart, addItem, isItemInCart, getCountInCart, removeItem, getTotalPrice }}
+      value={{
+        cart: cart,
+        addItem: addItem,
+        isItemInCart: isItemInCart,
+        getCountInCart: getCountInCart,
+        removeItem: removeItem,
+        getTotalPrice: getTotalPrice,
+        removeAllItems: removeAllItems,
+      }}
     >
       {props.children}
     </cartContext.Provider>

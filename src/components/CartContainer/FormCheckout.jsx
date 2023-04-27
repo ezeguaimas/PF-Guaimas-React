@@ -36,15 +36,33 @@ export default function FormCheckout({ onCheckout }) {
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label className="label-input">Nombre</label>
-          <input value={userData.username} name="username" type="text" required onChange={handleInputChange} />
+          <input
+            value={userData.username}
+            name="username"
+            type="text"
+            required
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form-group">
           <label className="label-input">Email</label>
-          <input value={userData.email} name="email" type="email" required onChange={handleInputChange} />
+          <input
+            value={userData.email}
+            name="email"
+            type="email"
+            required
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form-group">
           <label className="label-input">Teléfono</label>
-          <input value={userData.phone} name="phone" type="number" required onChange={handleInputChange} />
+          <input
+            value={userData.phone}
+            name="phone"
+            type="number"
+            required
+            onChange={handleInputChange}
+          />
         </div>
         <button onClick={onSubmit} type="submit">
           Crear orden
