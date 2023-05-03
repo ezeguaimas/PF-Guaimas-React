@@ -26,19 +26,19 @@ function CartContainer() {
   if (cart.length === 0) {
     return (
       <div>
-        <h1>Tu Carrito</h1>
-        <p>Tu carrito está vacío</p>
+        <h1>Carrito</h1>
+        <h2>Tu carrito está vacío</h2>
         <img src={emptyCartImage} alt="Carrito vacío" />
       </div>
     );
   }
   return (
     <>
-      <h1>Tu Carrito</h1>
+      <h1>Carrito</h1>
       <table className="cartList">
         <thead className="cartList_head">
           <tr className="cartList_row">
-            <th>Snap</th>
+            <th>Pic</th>
             <th>Producto</th>
             <th>Precio</th>
             <th>Cantidad</th>

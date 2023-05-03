@@ -8,8 +8,8 @@ function ErrorPNF() {
         src={error404}
         alt="error404"
         style={{
-          width: "30%",
-          height: "30%",
+          width: "20%",
+          height: "20%",
           display: "block",
           margin: "auto",
         }}

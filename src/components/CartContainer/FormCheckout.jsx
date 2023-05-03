@@ -65,7 +65,7 @@ export default function FormCheckout({ onCheckout }) {
           />
         </div>
         <button onClick={onSubmit} type="submit">
-          Crear orden
+          Finalizar compra
         </button>
         <button onClick={clearFormData} type="button">
           Cancelar

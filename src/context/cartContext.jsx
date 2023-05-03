@@ -1,29 +1,35 @@
 import { createContext, useState } from "react";
-import useDeepCopy from "../hooks/useDeepCopy";
 
 const cartContext = createContext({ cart: [] });
 
 function CartProvider(props) {
   const [cart, setCart] = useState([]);
-  const newCart = useDeepCopy(cart);
 
   function addItem(product, countFromCounter) {
     if (isItemInCart(product.id)) {
-      const itemIndex = cart.findIndex(
-        (itemInCart) => itemInCart.id === product.id
+      setCart((prevCart) =>
+        prevCart.map((itemInCart) => {
+          if (itemInCart.id === product.id) {
+            return {
+              ...itemInCart,
+              count: itemInCart.count + countFromCounter,
+            };
+          }
+          return itemInCart;
+        })
       );
-      newCart[itemIndex].count += countFromCounter;
     } else {
-      newCart.push({ ...product, count: countFromCounter });
+      setCart((prevCart) => [
+        ...prevCart,
+        { ...product, count: countFromCounter },
+      ]);
     }
-    setCart(newCart);
   }
 
   function removeItem(idToDelete) {
-    const updatedCart = cart.filter(
-      (itemInCart) => itemInCart.id !== idToDelete
+    setCart((prevCart) =>
+      prevCart.filter((itemInCart) => itemInCart.id !== idToDelete)
     );
-    setCart(updatedCart);
   }
 
   function isItemInCart(id) {
@@ -45,9 +51,7 @@ function CartProvider(props) {
   }
 
   function removeAllItems() {
-    cart.forEach((item) => {
-      removeItem(item.id);
-    });
+    setCart([]);
   }
 
   return (

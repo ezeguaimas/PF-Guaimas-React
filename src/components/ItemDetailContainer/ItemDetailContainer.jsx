@@ -8,6 +8,7 @@ import { cartContext } from "../../context/cartContext";
 import { getSingleItem } from "../../services/firestore";
 import Flex from "../Flex/Flex";
 import { Card, Typography } from "@mui/material";
+import Swal from "sweetalert2";
 
 function ItemDetailContainer() {
   const [product, setProduct] = useState([]);
@@ -18,16 +19,22 @@ function ItemDetailContainer() {
   useEffect(() => {
     getSingleItem(productid).then((respuesta) => {
       setProduct(respuesta);
-      console.log(respuesta);
     });
   }, [productid]);
 
   function onAddToCart(count) {
-    addItem(product, count);
+    if (count <= 0) {
+      return Swal.fire({
+        icon: "error",
+        title: "La cantidad seleccionada no es válida",
+        text: "Agrega al menos un producto!",
+      });
+    } else {
+      addItem(product, count);
+    }
   }
 
   const countInCart = getCountInCart(product.id);
-  console.log(countInCart);
 
   return (
     <Flex>
